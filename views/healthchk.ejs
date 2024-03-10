@@ -13,9 +13,15 @@
                     <li><a href="/">Contact</a></li>
                 </ul>
             </div>
-            <div class="name">
-                please login
-            </div>
+            <% if (locals.nameto) { %>
+                <div class="name">
+                    <%= nameto %>
+                </div>
+                <% } else { %>
+                <div class="name">
+                    please login
+                </div>
+            <% } %>
         </div>
         
     </div>
