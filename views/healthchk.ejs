@@ -3,7 +3,7 @@
     <div class="landing_page">
         <div class="nav">
             <div class="heading">
-                Health Web
+                Health_Sympto_Care
             </div>
             <div class="routes">
                 <ul class="navlinks">
@@ -16,6 +16,7 @@
             <% if (locals.nameto) { %>
                 <div class="name">
                     <%= nameto %>
+                    <a href="/logout">LogOut</a>
                 </div>
                 <% } else { %>
                 <div class="name">
@@ -23,7 +24,21 @@
                 </div>
             <% } %>
         </div>
-        
+        <div class="chk">
+            <div class="guide">
+                Hi&nbsp;<span> <%= nameto %> </span>&nbsp;Please Specify Your Symptoms To Analyse More
+            </div>
+            <div class="sypmInp">
+                <label for="itemInput">ENTER SYMPTOMS: </label>
+                <div>
+                    <input type="text" id="itemInput" placeholder="Mention Here" />
+                    <button onclick="addItem()">Add</button>
+                </div>
+            </div>
+            <div class="chkdis">
+                Get Piechart
+            </div>
+        </div>
     </div>
 
 <%- include('partials/footer') %>

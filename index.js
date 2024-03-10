@@ -59,6 +59,15 @@ app.get("/healthchk", (req, res) => {
     }
 });
 
+app.get("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 app.post("/register", async (req, res) => {
     const email = req.body.username;
     const password = req.body.password;
