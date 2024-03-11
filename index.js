@@ -90,7 +90,8 @@ app.post("/register", async (req, res) => {
               "INSERT INTO users (name,email, password) VALUES ($1, $2, $3)",
               [name, email, hash]
             );
-            res.render("home.ejs",{nameto: name});
+            // res.render("home.ejs",{nameto: name});
+            res.redirect("/login",{alter: ""});
           }
         });
       }
