@@ -10,6 +10,7 @@ import env from "dotenv";
 const app = express();
 const port = 3000;
 const saltRounds = 10;
+var timepass = -1;
 env.config();
 
 app.use(
@@ -43,7 +44,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+  if(timepass != -1){
+    res.render("login.ejs",{alter: "Registered Successfully Please Login"});
+  }
+  else{
     res.render("login.ejs");
+  }
 });
   
 app.get("/register", (req, res) => {
@@ -60,6 +66,7 @@ app.get("/healthchk", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
+  timepass = -1;
   req.logout(function (err) {
     if (err) {
       return next(err);
@@ -91,7 +98,8 @@ app.post("/register", async (req, res) => {
               [name, email, hash]
             );
             // res.render("home.ejs",{nameto: name});
-            res.redirect("/login",{alter: ""});
+            timepass = 1;
+            res.redirect("/login");
           }
         });
       }

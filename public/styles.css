@@ -116,6 +116,7 @@
     border: 2px solid rgb(105, 105, 239);
     border-radius: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -169,7 +170,7 @@
     border:2px solid rgb(58, 58, 119);
     font-size: 1.3rem;
     border-radius: 5px;
-}
+} 
 .sypmInp button{
     border:2px solid rgb(58, 58, 119);
     font-size: 1.3rem;
@@ -201,4 +202,7 @@
     /* background-color: rgb(159, 159, 235); */
     color: rgb(58, 58, 119);
     font-weight: bold;
+}
+.Green{
+    color: rgb(142, 207, 142);
 }
