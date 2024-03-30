@@ -6,12 +6,34 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 import session from "express-session";
 import env from "dotenv";
+import axios from "axios"; 
 
 const app = express();
 const port = 3000;
 const saltRounds = 10;
 var timepass = -1;
 env.config();
+
+
+const flaskServerURL = 'http://localhost:5000';
+
+let featureNames = [];
+
+// Fetch feature names from Flask server
+async function fetchFeatureNames() {
+    try {
+        const response = await axios.get(`${flaskServerURL}/featureNames`);
+        featureNames = response.data;
+        console.log('Feature names fetched successfully:', featureNames);
+    } catch (error) {
+        console.error('Error fetching feature names:', error);
+    }
+}
+
+// Fetch feature names when server starts
+fetchFeatureNames();
+
+
 
 app.use(
     session({
