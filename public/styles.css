@@ -199,10 +199,140 @@
 }
 .chkdis:hover{
     border:3px solid rgb(58, 58, 119);
+    cursor: pointer;
     /* background-color: rgb(159, 159, 235); */
     color: rgb(58, 58, 119);
     font-weight: bold;
 }
 .Green{
     color: rgb(142, 207, 142);
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    z-index: 1;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.dropdown-content div {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.dropdown-content div:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+.displaySymp{
+    position: absolute;
+    top: 32vh;
+    left: 14vw;
+    /* border: 2px solid red; */
+    height: 25vh;
+    width: 35vw;
+    display: grid;
+  justify-content: space-around;
+  grid-template-columns: 10vw 10vw 10vw;
+}
+.small_cross{
+    height: 4vh;
+    width: 2.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(58, 58, 119);
+    background-color: white;
+}
+.small_cross:hover{
+    border: 2px solid red;
+    cursor: pointer;
+}
+.sympdiv{
+    display: flex;
+    color: rgb(58, 58, 119);
+    font-weight: bold;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 2px solid red; */
+    height: 5vh;
+}
+.piechartdiv{
+    position: absolute;
+    top: 15vh;
+    left: 22vw;
+    height: 70vh;
+    width: 56vw;
+    /* border: 2px solid rgb(58, 58, 119); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.piechartbtm{
+    position: absolute;
+    color: rgb(58, 58, 119);
+    font-size: 1.5rem;
+    top: 15vh;
+    left: 1vw;
+    /* border: 2px solid red; */
+    width: 20vw;
+    height: 25vh;
+}
+.piechartbtm em{
+    font-weight: bold;
+}
+.largestdis{
+    position: absolute;
+    color: rgb(58, 58, 119);
+    font-size: 1.5rem;
+    font-weight: 500;
+    top: 40vh;
+    left: 1vw;
+    /* border: 2px solid rgb(58, 58, 119); */
+    width: 20vw;
+    height: 15vh;
+}
+.helpUs{
+    position: absolute;
+    color: rgb(58, 58, 119);
+    font-size: 1.5rem;
+    font-weight: 500;
+    top: 15vh;
+    left: 79vw;
+    /* border: 2px solid rgb(58, 58, 119); */
+    width: 19vw;
+    height: 15vh;
+}
+.hubtn{
+    position: absolute;
+    color: rgb(58, 58, 119);
+    font-size: 1.3rem;
+    font-weight: 500;
+    top: 32vh;
+    left: 79vw;
+    border: 2px solid rgb(58, 58, 119);
+    width: 20vw;
+    height: 5vh;
+    border-radius: 5px;
+    background-color: white;
+}
+.hubtn:hover{
+    cursor: pointer;
+    font-weight: bold;
+    border: 3px solid black;
+    text-decoration: underline;
 }

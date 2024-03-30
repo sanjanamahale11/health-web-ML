@@ -1,0 +1,87 @@
+<%- include('partials/header') %>
+<div class="landing_page">
+    <div class="nav">
+        <div class="heading">
+            Health_Sympto_Care
+        </div>
+        <div class="routes">
+            <ul class="navlinks">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">About</a></li>
+                <li><a href="/">Services</a></li>
+                <li><a href="/">Contact</a></li>
+            </ul>
+        </div>
+       <% if (locals.nameto) { %>
+        <div class="name">
+            <%= nameto %>
+            <a href="/logout">LogOut</a>
+        </div>
+        <% } else { %>
+        <div class="name">
+            please login
+        </div>
+        <% } %>
+    </div>
+    <div class="piechartdiv">
+        <canvas id="myPieChart"></canvas>
+    </div>
+    <div class="piechartbtm">
+        Hey <em> <%= nameto %> </em> ,Thanks for using our website, here are your predictions and piechart.
+    </div>
+    <div id="largestDisease" class="largestdis"></div>
+    <div class="helpUs">Help us to Train Our Model , Give us the Exact disease after Checkup.</div>
+    <button class="hubtn">Help Us</button>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Extract the data passed from the server-side
+        const data = <%- JSON.stringify(data) %>;
+
+        // Extract labels and data values from the received data
+        const labels = Object.keys(data);
+        const values = Object.values(data);
+
+        // Get the canvas element
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+
+        // Create a new pie chart instance
+        const myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Pie Chart',
+                    data: values,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(255, 159, 64, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                // Customize options as needed
+            }
+        });
+
+        const largestIndex = values.indexOf(Math.max(...values));
+
+        // Display the largest percentage disease
+        const largestDiseaseDiv = document.getElementById('largestDisease');
+        largestDiseaseDiv.textContent = `Largest Percentage Disease: ${labels[largestIndex]}`;
+    </script>
+
+
+<%- include('partials/footer') %>

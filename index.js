@@ -12,9 +12,10 @@ const app = express();
 const port = 3000;
 const saltRounds = 10;
 var timepass = -1;
+var haschart = -1;
 env.config();
 
-
+let dataAboutChart;
 const flaskServerURL = 'http://localhost:5000';
 
 let featureNames = [];
@@ -48,6 +49,7 @@ app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.json());
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",
@@ -80,7 +82,7 @@ app.get("/register", (req, res) => {
 
 app.get("/healthchk", (req, res) => {
     if(req.isAuthenticated()){
-        res.render("healthchk.ejs",{nameto: req.user.name});
+        res.render("healthchk.ejs",{nameto: req.user.name, symps: featureNames});
     }
     else{
         res.render("healthchk.ejs");
@@ -130,7 +132,36 @@ app.post("/register", async (req, res) => {
     }
 });
 
+app.get("/piechart", (req, res) => {
+  if(haschart != -1){
+    console.log(dataAboutChart);
+    res.render("piechart.ejs",{data: dataAboutChart,nameto: req.user.name});
+  }
+  else{
+    res.send("error occured");
+  }
+});
+app.post('/getPieChart', async (req, res) => {
+  const selectedSymptoms = req.body.selectedSymptoms;
+  try {
+      console.log(selectedSymptoms);
+      console.log('ji haa');
+      // Make a POST request to Flask server running on port 5000 using Axios
+      const flaskResponse = await axios.post('http://localhost:5000/predict', {
+          symptoms: selectedSymptoms
+      });
 
+      console.log(flaskResponse.data);
+      // res.json(flaskResponse.data);
+      // res.redirect("/piechart");
+      haschart = 1;
+      dataAboutChart = flaskResponse.data;
+      res.status(200).json({ data: flaskResponse.data, redirect: "/piechart" });
+  } catch (error) {
+      console.error('Error in POST request to Flask server:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 // app.post("/login", async (req, res) => {
 //     const email = req.body.username;
 //     const loginPassword = req.body.password;
