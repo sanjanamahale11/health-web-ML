@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+<div class="landing_page">
+    <div class="nav">
+        <div class="heading">
+            Health_Sympto_Care
+        </div>
+        <div class="routes">
+            <ul class="navlinks">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">About</a></li>
+                <li><a href="/">Services</a></li>
+                <li><a href="/">Contact</a></li>
+            </ul>
+        </div>
+       <% if (locals.nameto) { %>
+        <div class="name">
+            <%= nameto %>
+            <a href="/logout">LogOut</a>
+        </div>
+        <% } else { %>
+        <div class="name">
+            please login
+        </div>
+        <% } %>
+    </div>
+
+    <script>
+        // Function to display message and redirect after a certain duration
+        function displayMessageAndRedirect() {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add("thanksmsg");
+            messageElement.textContent = "Thanks for taking your time and helping us improve, Data Provided by you is successfully taken and will be used for model training after verification . Your contribution matters a lot. Redirecting to home page in ";
+            document.body.appendChild(messageElement);
+            
+            let counter = 20; // Duration in seconds
+            const timer = setInterval(() => {
+                if (counter > 0) {
+                    messageElement.textContent = `Thanks for taking your time and helping us improve, Data Provided by you is successfully taken and will be used for model training after verification . Your contribution matters a lot. Redirecting to home page in ${counter} seconds`;
+                    counter--;
+                } else {
+                    clearInterval(timer);
+                    window.location.href = '/'; // Redirect to home page
+                }
+            }, 1000); // Update every second
+        }
+    
+        // Call the function when the page is loaded
+        window.onload = displayMessageAndRedirect;
+    </script>
+<%- include('partials/footer') %>

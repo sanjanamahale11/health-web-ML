@@ -151,10 +151,10 @@
     font-weight: bold;
 }
 .sypmInp{
-    height: 15vh;
+    height: 10vh;
     width: 46vw;
     position: absolute;
-    top: 20vh;
+    top: 25vh;
     left: 2vw;
     /* border: 2px solid red; */
     display: flex;
@@ -186,7 +186,7 @@
 .chkdis{
     height: 8vh;
     width: 10vw;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     border-radius: 6px;
     position: absolute;
     top: 40vh;
@@ -239,7 +239,7 @@
 }
 .displaySymp{
     position: absolute;
-    top: 32vh;
+    top: 35vh;
     left: 14vw;
     /* border: 2px solid red; */
     height: 25vh;
@@ -315,24 +315,86 @@
     left: 79vw;
     /* border: 2px solid rgb(58, 58, 119); */
     width: 19vw;
-    height: 15vh;
+    height: 25vh;
 }
 .hubtn{
     position: absolute;
     color: rgb(58, 58, 119);
     font-size: 1.3rem;
     font-weight: 500;
-    top: 32vh;
+    top: 40vh;
     left: 79vw;
     border: 2px solid rgb(58, 58, 119);
     width: 20vw;
-    height: 5vh;
+    height: 7vh;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
 }
 .hubtn:hover{
     cursor: pointer;
+    color: black;
     font-weight: bold;
     border: 3px solid black;
     text-decoration: underline;
+}
+.chk1{
+    height: 60vh;
+    width: 50vw;
+    position: absolute;
+    top: 20vh;
+    left: 25vw;
+    border: 3px solid rgb(9, 123, 28);
+    border-radius: 20px;
+}
+.guide1{
+    height: 15vh;
+    width: 49.8vw;
+    position: absolute;
+    top: 0vh;
+    /* border: 2px solid red; */
+    border-bottom: 3px solid rgb(9, 123, 28);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(58, 58, 119);
+    font-size: 1.3rem;
+}
+.text-input{
+    height: 10vh;
+    width: 46vw;
+    position: absolute;
+    top: 15vh;
+    left: 2vw;
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.text-input label{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: rgb(58, 58, 119);
+}
+.text-input input{
+    border:2px solid rgb(58, 58, 119);
+    font-size: 1.3rem;
+    border-radius: 5px;
+    width: 20vw;
+} 
+.thanksmsg{
+    position: absolute;
+    top: 20vh;
+    left: 20vw;
+    height: 30vh;
+    width: 60vw;
+    /* border: 2px solid red; */
+    color:rgb(17, 126, 34);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
 }

@@ -1,0 +1,145 @@
+<%- include('partials/header') %>
+<div class="landing_page">
+    <div class="nav">
+        <div class="heading">
+            Health_Sympto_Care
+        </div>
+        <div class="routes">
+            <ul class="navlinks">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">About</a></li>
+                <li><a href="/">Services</a></li>
+                <li><a href="/">Contact</a></li>
+            </ul>
+        </div>
+       <% if (locals.nameto) { %>
+        <div class="name">
+            <%= nameto %>
+            <a href="/logout">LogOut</a>
+        </div>
+        <% } else { %>
+        <div class="name">
+            please login
+        </div>
+        <% } %>
+    </div>
+
+    <div class="chk1">
+        <div class="guide1">
+            Hi&nbsp;<span> <%= nameto %> </span>&nbsp;Please Help Us To Improve
+        </div>
+        <div class="text-input">
+            <label for="textInput">DISEASE NAME: </label>
+            <input type="text" id="textInput" placeholder="Enter Your Disease Here" />
+        </div>
+        <div class="sypmInp">
+            <label for="itemInput">ENTER SYMPTOMS: </label>
+            <div class="dropdown">
+                <input type="text" id="itemInput" placeholder="Mention Here" oninput="suggestSymptoms()" />
+                <div id="suggestionsDropdown" class="dropdown-content"></div>
+            </div>
+            <button onclick="addItem()">Add</button>
+        </div>
+        <div id="selectedSymptoms" class="displaySymp">
+            <!-- Added symptoms will be displayed here -->
+        </div>
+        <button onclick="sendData()" class="chkdis">Submit Data</button>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const symptoms = <%- JSON.stringify(symps) %>; // Accessing symptoms passed from Node.js
+    let selectedSymptoms = Array(symptoms.length).fill(0);
+
+    function suggestSymptoms() {
+        const userInput = document.getElementById('itemInput').value.toLowerCase();
+        const suggestionsDropdown = document.getElementById('suggestionsDropdown');
+        // Ensure suggestionsDropdown exists
+        if (suggestionsDropdown) {
+            if (!userInput) {
+                suggestionsDropdown.classList.remove('show'); // Hide dropdown if input is empty
+                return;
+            }
+
+            // Clear previous suggestions
+            suggestionsDropdown.innerHTML = '';
+
+            const filteredSymptoms = symptoms.filter(symptom => symptom.toLowerCase().includes(userInput));
+            filteredSymptoms.forEach(symptom => {
+                const suggestion = document.createElement('div');
+                suggestion.textContent = symptom;
+                suggestion.onclick = () => {
+                    document.getElementById('itemInput').value = symptom;
+                    suggestionsDropdown.classList.remove('show'); // Hide dropdown after selecting suggestion
+                };
+                suggestionsDropdown.appendChild(suggestion);
+            });
+
+            suggestionsDropdown.classList.add('show'); // Show dropdown
+        }
+    }
+    function addItem() {
+        const symptomInput = document.getElementById('itemInput').value;
+        const index = symptoms.indexOf(symptomInput);
+        if (index !== -1) {
+            selectedSymptoms[index] = 1; // Mark the symptom as selected (1)
+            console.log(selectedSymptoms);
+            displaySelectedSymptoms();
+        }
+    }
+
+    function removeItem(index) {
+        selectedSymptoms[index] = 0; // Mark the symptom as unselected (0)
+        console.log(selectedSymptoms);
+        displaySelectedSymptoms(); // Update the displayed selected symptoms
+    }
+
+    function displaySelectedSymptoms() {
+        const selectedSymptomsDiv = document.getElementById('selectedSymptoms');
+        selectedSymptomsDiv.innerHTML = '';
+        selectedSymptoms.forEach((value, index) => {
+            if (value === 1) {
+                const symptomDiv = document.createElement('div');
+                symptomDiv.classList.add('sympdiv');
+                symptomDiv.textContent = symptoms[index];
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('small_cross');
+                removeButton.innerHTML = '❌'; // Cross button
+                removeButton.onclick = () => removeItem(index);
+                symptomDiv.appendChild(removeButton);
+                selectedSymptomsDiv.appendChild(symptomDiv);
+            }
+        });
+    }
+    async function sendData() {
+        const textInput = document.getElementById('textInput').value;
+        try {
+            console.log(selectedSymptoms);
+            console.log(textInput);
+            const axiosResponse = await axios.post('http://localhost:5000/add_data', {
+                selectedSymptoms: selectedSymptoms,
+                textInput: textInput
+            });
+
+            if (axiosResponse.status === 200) {
+                console.log("Data added successfully");
+                window.location.href = '/thanks';
+            } else {
+                console.error('Failed to add data');
+            }
+        } catch (error) {
+            console.error('Error in making POST request:', error);
+        }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        const dropdown = document.querySelector('.dropdown');
+        if (!dropdown.contains(event.target)) {
+            document.getElementById('suggestionsDropdown').classList.remove('show'); // Hide dropdown
+        }
+    });
+</script>
+    
+
+<%- include('partials/footer') %>

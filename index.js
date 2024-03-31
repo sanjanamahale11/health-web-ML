@@ -66,6 +66,9 @@ app.get("/", (req, res) => {
         res.render("home.ejs");
     }
 });
+app.get("/helpUs", (req, res) => {
+  res.render("helpUs.ejs",{nameto: req.user.name,symps: featureNames});
+});
 
 app.get("/login", (req, res) => {
   if(timepass != -1){
@@ -131,7 +134,9 @@ app.post("/register", async (req, res) => {
       console.log(err);
     }
 });
-
+app.get("/thanks", (req, res) => {
+   res.render("thanks.ejs",{nameto: req.user.name});
+});
 app.get("/piechart", (req, res) => {
   if(haschart != -1){
     console.log(dataAboutChart);
