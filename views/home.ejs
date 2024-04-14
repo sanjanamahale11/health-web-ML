@@ -3,6 +3,9 @@
     <div class="landing_page">
         <div class="nav">
             <div class="heading">
+                <div class="clgLogo">
+                    <img src="MANIT_LOGO.png">
+                </div>
                 Health_Sympto_Care
             </div>
             <div class="routes">
@@ -12,6 +15,28 @@
                     <li><a href="/">Services</a></li>
                     <li><a href="/">Contact</a></li>
                 </ul>
+            </div>
+            
+            <div class="text-container">
+                <div class="moving-text">Provide your symptoms, and receive the quickest prediction about your health. <span>&nbsp;&nbsp;||&nbsp;&nbsp;||&nbsp;&nbsp;</span> Assist us in training our model. <span>&nbsp;&nbsp;||&nbsp;&nbsp;||&nbsp;&nbsp;</span> Help Us </div>
+            </div>
+            <div class="sliderHome">
+                <div class="slider-container">
+                    <div class="slide active">
+                        <img src="ii3.png" alt="Slide 1">
+                    </div>
+                    <div class="slide">
+                        <img src="ii5.png" alt="Slide 2">
+                    </div>
+                    <div class="slide">
+                        <img src="ii4.png" alt="Slide 3">
+                    </div>
+                    <div class="slide">
+                        <img src="ii8.png" alt="Slide 4">
+                    </div>
+                </div>
+                <button id="prevBtn" class="slidebtn slideL"><img src="prevarrow.png"></button>
+                <button id="nextBtn" class="slidebtn slideR"><img src="nxtarrow.png"></button>
             </div>
            <% if (locals.nameto) { %>
             <div class="name">
@@ -36,9 +61,142 @@
                 <a href="/register">Register</a>
             </div>
         <% } %>
-        <div class="drimg">
+        <!-- <div class="drimg">
             <img src="dct.png">
+        </div> -->
+    </div>
+    <div class="aimOfHome">
+        <div class="aimHead">
+            AIM
+        </div>
+        <div class="aimImg">
+            <img src="logotype.png">
+        </div>
+        <div class="aimText">
+            <h4>Sympto-Care</h4>
+            The aim of Symto-Care is to predict diseases from symptoms, enabling early detection and enhancing healthcare accessibility. Through advanced technology, it empowers users with personalized insights, promotes health awareness, and ensures privacy. Ultimately, Symto-Care aims to improve health outcomes and quality of life for all users.
         </div>
     </div>
-
+    <div class="makeItBetter">
+        <div class="mibTop">
+            <div class="mtImg">
+                <img src="handi.png">
+            </div>
+            <div class="mtHead">
+                HELP US IN MAKING IT BETTER
+            </div>
+            <div class="mtText">
+                We welcome your participation in enhancing the directory further
+and also invite your comments and suggestions for improvement
+            </div>
+            <div class="mtBtn">
+                Suggest A Site &nbsp;&nbsp; | &nbsp;&nbsp;Share Feedback
+            </div>
+            <div class="mtLine">
+                <div class="mtLine1">
+                    CONNECT WITH US
+                </div>
+                <div class="mtLine2">
+                    <div class="mtimgntxt">
+                        <div class="mtforimg">
+                            <img src="linkedin.png">
+                        </div>
+                        <div class="mtimglabel">
+                            <div>LINK</div>
+                            <span>to us</span>
+                        </div>
+                    </div>
+                    <div class="mtimgntxt">
+                        <div class="mtforimg">
+                            <img src="mail.png">
+                        </div>
+                        <div class="mtimglabel">
+                            <div>BOOKMARK</div>
+                            <span>this page</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mibBtm">
+            <div class="mbfbox">
+                <div class="mbfboxim">
+                    <img src="hi1.png">
+                </div>
+                <div class="mbfboxim">
+                    <img src="hi2.png">
+                </div>
+                <div class="mbfboxim">
+                    <img src="hi3.png">
+                </div>
+                <div class="mbfboxim">
+                    <img src="hi4.png">
+                </div>
+                <div class="mbfboxim">
+                    <img src="hi5.png">
+                </div>
+                <div class="mbfboxim">
+                    <img src="hi6.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footerHomePage">
+        <div class="footerTxt">
+            <div style="color: white">Developed and hosted by <a href="https://www.manit.ac.in/" style="color: #a3d2f9">Maulana Azad National Institute of Technology</a></div>
+            <div style="color: white">All rights reserved © 2024</div>
+        </div>
+        <div class="footerLeftim">
+            <div class="footeri">
+                <img src="logo-nic.png">
+            </div>
+        </div>
+        <div class="footerRightim">
+            <div class="footeri">
+                <img src="logo-digital-india.png">
+            </div>
+        </div>
+    </div>
 <%- include('partials/footer') %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            // showSlide(currentSlide + 1);
+            const nextIndex = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.remove('active');
+            slides[nextIndex].classList.add('active', 'next');
+            setTimeout(() => {
+                slides[nextIndex].classList.remove('next');
+                slides[nextIndex].classList.add('active');
+            }, 100); // Adjust this value to match transition duration
+            currentSlide = nextIndex;
+        }
+
+        function prevSlide() {
+            // showSlide(currentSlide - 1);
+            const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+            slides[currentSlide].classList.remove('active');
+            slides[prevIndex].classList.add('active', 'prev');
+            setTimeout(() => {
+                slides[prevIndex].classList.remove('prev');
+                slides[prevIndex].classList.add('active');
+            }, 100); // Adjust this value to match transition duration
+            currentSlide = prevIndex;
+        }
+
+        setInterval(nextSlide, 5000); // Change slide every 3 seconds
+
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+    });
+</script>

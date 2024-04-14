@@ -3,6 +3,9 @@
     <div class="landing_page">
         <div class="nav">
             <div class="heading">
+                <div class="clgLogo">
+                    <img src="MANIT_LOGO.png">
+                </div>
                 Health_Sympto_Care
             </div>
             <div class="routes">
@@ -12,6 +15,9 @@
                     <li><a href="/">Services</a></li>
                     <li><a href="/">Contact</a></li>
                 </ul>
+            </div>
+            <div class="text-container">
+                <div class="moving-text">Provide your symptoms, and receive the quickest prediction about your health. <span>&nbsp;&nbsp;||&nbsp;&nbsp;||&nbsp;&nbsp;</span> Assist us in training our model. <span>&nbsp;&nbsp;||&nbsp;&nbsp;||&nbsp;&nbsp;</span> Help Us </div>
             </div>
             <% if (locals.nameto) { %>
                 <div class="name">
@@ -39,7 +45,7 @@
             <div id="selectedSymptoms" class="displaySymp">
                 <!-- Added symptoms will be displayed here -->
             </div>
-            <button onclick="getPieChart()" class="chkdis">Get Pie-Chart</button>
+            <button onclick="getPieChart()" class="chkdis">Analyse</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
